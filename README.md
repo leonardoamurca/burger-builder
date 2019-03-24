@@ -1,3 +1,3 @@
 # burguer-build
 
-Um aplicativo que simula construções de hamburguers.
+WebApplication to build a burger
