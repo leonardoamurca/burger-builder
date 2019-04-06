@@ -3,12 +3,12 @@ import styles from './NavigationItems.module.css';
 import NavigationItem from './NavigationItem/NavigationItem';
 
 const NavigationItems = () => (
-  <li className={styles.NavigationItems}>
+  <ul className={styles.NavigationItems}>
     <NavigationItem link="/" active>
       Burger Builder
     </NavigationItem>
     <NavigationItem link="/">Checkout</NavigationItem>
-  </li>
+  </ul>
 );
 
 export default NavigationItems;
