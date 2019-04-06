@@ -11,7 +11,6 @@ const OrderSummary = props => {
     );
   });
 
-  console.log(ingredientsSummary);
   return (
     <>
       <h3>YOUR ORDER</h3>
