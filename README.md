@@ -1,3 +1,3 @@
-# burguer-build
+# burguer-builder
 
 WebApplication to build a burger
