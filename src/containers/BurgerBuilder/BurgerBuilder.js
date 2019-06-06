@@ -6,24 +6,21 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import withErrorHandler from '../withErrorHandler/withErrorHandler';
 import axios from '../../axios-orders';
+
 import { connect } from 'react-redux';
-import { ADD_INGREDIENT, REMOVE_INGREDIENT } from '../../store/actions';
+import {
+  addIngredient,
+  removeIngredient,
+  initIngredients,
+} from '../../store/actions/burguerBuilder';
 
 class BurgerBuilder extends Component {
   state = {
     purchasing: false,
-    loading: false,
-    error: false,
   };
 
   componentDidMount() {
-    // axios.get('https://my-burguer-builder.firebaseio.com/ingredients.json')
-    //   .then(response => {
-    //     this.setState({ingredients: response.data})
-    //   })
-    //   .catch(error => {
-    //     this.setState({error: true})
-    //   });
+    this.props.onInitIngredients();
   }
 
   isPurchaseable(ingredients) {
@@ -47,7 +44,7 @@ class BurgerBuilder extends Component {
   };
 
   render() {
-    const { purchasing, loading, error } = this.state;
+    const { purchasing } = this.state;
     const { ings, price, onIngredientAdded, onIngredientRemoved } = this.props;
     const disabledInfo = {
       ...ings,
@@ -60,7 +57,7 @@ class BurgerBuilder extends Component {
     return (
       <>
         <Modal show={purchasing} modalClose={this.purchaseHandler}>
-          {loading || !ings ? (
+          {!ings ? (
             <Spinner />
           ) : (
             <OrderSummary
@@ -83,7 +80,7 @@ class BurgerBuilder extends Component {
               purchaseable={this.isPurchaseable(ings)}
             />
           </>
-        ) : error ? (
+        ) : this.props.error ? (
           <h1 style={{ textAlign: 'center' }}>Ingredients cannot be loaded!</h1>
         ) : (
           <Spinner />
@@ -97,15 +94,17 @@ const mapStateToProps = state => {
   return {
     ings: state.ingredients,
     price: state.totalPrice,
+    error: state.error,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onIngredientAdded: ingredientName =>
-      dispatch({ type: ADD_INGREDIENT, ingredientName: ingredientName }),
+      dispatch(addIngredient(ingredientName)),
     onIngredientRemoved: ingredientName =>
-      dispatch({ type: REMOVE_INGREDIENT, ingredientName: ingredientName }),
+      dispatch(removeIngredient(ingredientName)),
+    onInitIngredients: () => dispatch(initIngredients()),
   };
 };
 
