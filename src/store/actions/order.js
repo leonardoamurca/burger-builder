@@ -1,7 +1,8 @@
 import {
+  PURCHASE_BURGUER_START,
+  PURCHASE_INIT,
   PURCHASE_BURGUER_SUCCESS,
   PURCHASE_BURGUER_FAIL,
-  PURCHASE_BURGUER_START,
 } from './types';
 import axios from '../../axios-orders';
 
@@ -26,13 +27,19 @@ export const purchaseBurguerFail = error => {
   };
 };
 
+export const purchaseInit = () => {
+  return {
+    type: PURCHASE_INIT,
+  };
+};
+
 export const purchaseBurguer = orderData => dispatch => {
   purchaseBurguerStart();
   axios
     .post('/orders.json', orderData)
     .then(response => {
       console.log(response.data);
-      dispatch(purchaseBurguerSuccess(response.data, orderData));
+      dispatch(purchaseBurguerSuccess(response.data.name, orderData));
     })
     .catch(error => {
       dispatch(purchaseBurguerFail(error));
