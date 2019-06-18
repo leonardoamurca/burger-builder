@@ -74,6 +74,7 @@ class ContactData extends Component {
         value: '',
         validation: {
           required: true,
+          isEmail: true,
         },
         valid: false,
         touched: false,
@@ -107,7 +108,7 @@ class ContactData extends Component {
       price: this.props.price,
       orderData: formData,
     };
-    this.props.onOrderBurguer(order);
+    this.props.onOrderBurguer(order, this.props.token);
   };
 
   inputChangeHandler = (event, inputIdentifier) => {
@@ -141,6 +142,11 @@ class ContactData extends Component {
     }
     if (rules.minLength) {
       isValid = value.length >= rules.minLength && isValid;
+    }
+
+    if (rules.isEmail) {
+      const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      isValid = pattern.test(value) && isValid;
     }
 
     if (rules.maxLength) {
@@ -191,12 +197,14 @@ const mapStateToProps = state => {
     ings: state.burguerBuilder.ingredients,
     price: state.burguerBuilder.totalPrice,
     loading: state.order.loading,
+    token: state.auth.token,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onOrderBurguer: orderData => dispatch(purchaseBurguer(orderData)),
+    onOrderBurguer: (orderData, token) =>
+      dispatch(purchaseBurguer(orderData, token)),
   };
 };
 
