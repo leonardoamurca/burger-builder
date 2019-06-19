@@ -26,4 +26,4 @@ node_modules
 yarn.lock
 .vscode
 
-configs/*
+src/configs/*
