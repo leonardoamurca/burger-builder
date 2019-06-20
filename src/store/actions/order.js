@@ -1,3 +1,5 @@
+import axios from '../../axios-orders';
+
 import {
   PURCHASE_BURGUER_START,
   PURCHASE_BURGUER_SUCCESS,
@@ -7,7 +9,6 @@ import {
   FETCH_ORDERS_SUCCESS,
   FETCH_ORDERS_FAIL,
 } from './types';
-import axios from '../../axios-orders';
 
 export const purchaseBurguerStart = () => ({
   type: PURCHASE_BURGUER_START,
@@ -16,7 +17,7 @@ export const purchaseBurguerStart = () => ({
 export const purchaseBurguerSuccess = (id, orderData) => ({
   type: PURCHASE_BURGUER_SUCCESS,
   orderId: id,
-  orderData: orderData,
+  orderData,
 });
 
 export const purchaseBurguerFail = error => ({

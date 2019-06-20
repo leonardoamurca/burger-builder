@@ -1,5 +1,13 @@
-import { AUTH_START, AUTH_SUCCESS, AUTH_FAIL, AUTH_LOGOUT } from './types';
 import axios from 'axios';
+
+import {
+  AUTH_START,
+  AUTH_SUCCESS,
+  AUTH_FAIL,
+  AUTH_LOGOUT,
+  SET_AUTH_REDIRECT_PATH,
+} from './types';
+
 import { loginUrl, signUpUrl } from '../../configs/endpoints';
 
 export const authStart = () => ({
@@ -17,35 +25,38 @@ export const authFail = error => ({
   error,
 });
 
-export const logout = () => {
-  return {
-    type: AUTH_LOGOUT,
-  };
+export const logout = () => ({
+  type: AUTH_LOGOUT,
+});
+
+export const checkAuthTimeout = expirationTime => dispatch => {
+  setTimeout(() => {
+    dispatch(logout());
+  }, expirationTime * 1000);
 };
 
-export const checkAuthTimeout = expirationTime => {
-  return dispatch => {
-    setTimeout(() => {
-      dispatch(logout());
-    }, expirationTime * 1000);
-  };
-};
+export const setAuthRedirectPath = path => ({
+  type: SET_AUTH_REDIRECT_PATH,
+  path,
+});
 
 export const auth = (email, password, isSignup) => dispatch => {
   dispatch(authStart());
+
   const authData = {
     email,
     password,
     returnSecureToken: true,
   };
   let url = signUpUrl;
+
   if (!isSignup) {
     url = loginUrl;
   }
+
   axios
     .post(url, authData)
     .then(response => {
-      console.log(response);
       dispatch(authSuccess(response.data.idToken, response.data.localId));
       dispatch(checkAuthTimeout(response.data.expiresIn));
     })

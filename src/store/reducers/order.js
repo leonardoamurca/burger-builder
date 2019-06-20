@@ -1,3 +1,5 @@
+import { updateObject } from '../utility';
+
 import {
   PURCHASE_BURGUER_FAIL,
   PURCHASE_BURGUER_SUCCESS,
@@ -7,7 +9,6 @@ import {
   FETCH_ORDERS_SUCCESS,
   FETCH_ORDERS_FAIL,
 } from '../actions/types';
-import { updateObject } from '../utility';
 
 const initialState = {
   orders: [],

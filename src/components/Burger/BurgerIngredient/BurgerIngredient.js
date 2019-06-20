@@ -1,11 +1,12 @@
 import React from 'react';
-import styles from './BurgerIngredient.module.css';
 import PropTypes from 'prop-types';
 
-const BurgerIngredient = props => {
+import styles from './BurgerIngredient.module.css';
+
+const BurgerIngredient = ({ type }) => {
   let ingredient = null;
 
-  switch (props.type) {
+  switch (type) {
     case 'bread-bottom':
       ingredient = <div className={styles.BreadBottom} />;
       break;

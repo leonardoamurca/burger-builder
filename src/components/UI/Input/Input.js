@@ -1,21 +1,32 @@
 import React from 'react';
+
 import styles from './Input.module.css';
 
-const Input = (props) => {
+const Input = ({
+  invalid,
+  shouldValidate,
+  touched,
+  elementType,
+  elementConfig,
+  value,
+  changed,
+  label,
+}) => {
   let inputElement = null;
   const inputClasses = [styles.InputElement];
 
-  if(props.invalid && props.shouldValidate && props.touched) {
+  if (invalid && shouldValidate && touched) {
     inputClasses.push(styles.Invalid);
   }
-  switch(props.elementType) {
+
+  switch (elementType) {
     case 'input':
       inputElement = (
         <input
           className={inputClasses.join(' ')}
-          {...props.elementConfig}
-          value={props.value}
-          onChange={props.changed}
+          {...elementConfig}
+          value={value}
+          onChange={changed}
         />
       );
       break;
@@ -23,9 +34,9 @@ const Input = (props) => {
       inputElement = (
         <textarea
           className={inputClasses.join(' ')}
-          {...props.elementConfig}
-          value={props.value}
-          onChange={props.changed}
+          {...elementConfig}
+          value={value}
+          onChange={changed}
         />
       );
       break;
@@ -33,13 +44,11 @@ const Input = (props) => {
       inputElement = (
         <select
           className={inputClasses.join(' ')}
-          value={props.value}
-          onChange={props.changed}
+          value={value}
+          onChange={changed}
         >
-          {props.elementConfig.options.map(opt => (
-            <option
-              key={opt.value}
-              value={opt.value}>
+          {elementConfig.options.map(opt => (
+            <option key={opt.value} value={opt.value}>
               {opt.displayValue}
             </option>
           ))}
@@ -50,14 +59,14 @@ const Input = (props) => {
       inputElement = (
         <input
           className={inputClasses.join(' ')}
-          {...props.elementConfig}
-          value={props.value}
+          {...elementConfig}
+          value={value}
         />
       );
   }
-  return(
+  return (
     <div className={styles.Input}>
-      <label className={styles.Label}>{props.label}</label>
+      <label className={styles.Label}>{label}</label>
       {inputElement}
     </div>
   );

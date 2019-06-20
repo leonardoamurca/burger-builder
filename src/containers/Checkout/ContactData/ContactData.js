@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import Button from '../../../components/UI/Button/Button';
-import styles from './ContactData.module.css';
+import { connect } from 'react-redux';
 import axios from '../../../axios-orders';
+
+import styles from './ContactData.module.css';
+
+import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
-import { connect } from 'react-redux';
+
 import withErrorHandler from '../../withErrorHandler/withErrorHandler';
+
 import { purchaseBurguer } from '../../../store/actions/order';
 
 class ContactData extends Component {
@@ -155,21 +159,25 @@ class ContactData extends Component {
     return isValid;
   }
   render() {
+    const { loading } = this.props;
+    const { orderForm, formIsValid } = this.state;
+    const { orderHandler, inputChangeHandler } = this;
+
     let formElementsArray = [];
-    for (let key in this.state.orderForm) {
+    for (let key in orderForm) {
       formElementsArray.push({
         id: key,
-        config: this.state.orderForm[key],
+        config: orderForm[key],
       });
     }
-    console.log(this.state);
+
     return (
       <div className={styles.ContactData}>
         <h4>Entre your Contact Data</h4>
-        {this.props.loading ? (
+        {loading ? (
           <Spinner />
         ) : (
-          <form onSubmit={this.orderHandler}>
+          <form onSubmit={orderHandler}>
             {formElementsArray.map(el => (
               <Input
                 key={el.id}
@@ -179,10 +187,10 @@ class ContactData extends Component {
                 invalid={!el.config.valid}
                 shouldValidate={el.config.validation}
                 touched={el.config.touched}
-                changed={event => this.inputChangeHandler(event, el.id)}
+                changed={event => inputChangeHandler(event, el.id)}
               />
             ))}
-            <Button btnType="Success" disabled={!this.state.formIsValid}>
+            <Button btnType="Success" disabled={!formIsValid}>
               ORDER
             </Button>
           </form>
@@ -192,21 +200,17 @@ class ContactData extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    ings: state.burguerBuilder.ingredients,
-    price: state.burguerBuilder.totalPrice,
-    loading: state.order.loading,
-    token: state.auth.token,
-  };
-};
+const mapStateToProps = state => ({
+  ings: state.burguerBuilder.ingredients,
+  price: state.burguerBuilder.totalPrice,
+  loading: state.order.loading,
+  token: state.auth.token,
+});
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onOrderBurguer: (orderData, token) =>
-      dispatch(purchaseBurguer(orderData, token)),
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  onOrderBurguer: (orderData, token) =>
+    dispatch(purchaseBurguer(orderData, token)),
+});
 
 export default connect(
   mapStateToProps,

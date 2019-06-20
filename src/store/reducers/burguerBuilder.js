@@ -1,10 +1,11 @@
+import { updateObject } from '../utility';
+
 import {
   ADD_INGREDIENT,
   REMOVE_INGREDIENT,
   SET_INGREDIENTS,
   FETCH_INGREDIENTS_FAILED,
 } from '../actions/types';
-import { updateObject } from '../utility';
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -17,6 +18,7 @@ const initialState = {
   ingredients: null,
   totalPrice: 4,
   error: false,
+  building: false,
 };
 
 const addIngredient = (state, action) => {
@@ -27,6 +29,7 @@ const addIngredient = (state, action) => {
   const updatedState = {
     ingredients: updatedIngredients,
     totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
+    building: true,
   };
   return updateObject(state, updatedState);
 };
@@ -39,6 +42,7 @@ const removeIngredient = (state, action) => {
   const updatedSt = {
     ingredients: updatedIngs,
     totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName],
+    building: true,
   };
   return updateObject(state, updatedSt);
 };
@@ -48,6 +52,7 @@ const setIngredients = (state, action) =>
     ingredients: action.ingredients,
     totalPrice: 4,
     error: false,
+    building: false,
   });
 
 const fetchIngredientsFailed = (state, action) =>

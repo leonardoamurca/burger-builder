@@ -1,10 +1,11 @@
+import axios from '../../axios-orders';
+
 import {
   ADD_INGREDIENT,
   REMOVE_INGREDIENT,
   SET_INGREDIENTS,
   FETCH_INGREDIENTS_FAILED,
 } from './types';
-import axios from '../../axios-orders';
 
 export const addIngredient = ingredientName => ({
   type: ADD_INGREDIENT,
@@ -21,8 +22,9 @@ export const setIngredients = ingredients => ({
   ingredients,
 });
 
-export const fetchIngredientsFailed = () => ({
+export const fetchIngredientsFailed = error => ({
   type: FETCH_INGREDIENTS_FAILED,
+  error,
 });
 
 export const initIngredients = () => dispatch => {
@@ -32,6 +34,6 @@ export const initIngredients = () => dispatch => {
       dispatch(setIngredients(response.data));
     })
     .catch(error => {
-      dispatch(fetchIngredientsFailed());
+      dispatch(fetchIngredientsFailed(error));
     });
 };

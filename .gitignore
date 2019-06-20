@@ -27,3 +27,4 @@ yarn.lock
 .vscode
 
 src/configs/*
+src/axios-orders.js
