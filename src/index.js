@@ -14,7 +14,9 @@ import App from './App';
 import burguerBuilderReducer from './store/reducers/burguerBuilder';
 import orderReducer from './store/reducers/order';
 import authReducer from './store/reducers/auth';
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = process.env.NODE_ENV
+  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  : null || compose;
 
 const rootReducer = combineReducers({
   burguerBuilder: burguerBuilderReducer,
