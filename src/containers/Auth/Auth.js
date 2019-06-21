@@ -8,7 +8,7 @@ import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
-import { updateObject } from '../../shared/utility';
+import { updateObject, checkValidity } from '../../shared/utility';
 
 import { auth, setAuthRedirectPath } from '../../store/actions/auth';
 
@@ -59,27 +59,6 @@ class Auth extends Component {
     }));
   };
 
-  checkValidity(value, rules) {
-    let isValid = true;
-
-    if (rules.required) {
-      isValid = value.trim() !== '' && isValid;
-    }
-    if (rules.minLength) {
-      isValid = value.length >= rules.minLength && isValid;
-    }
-
-    if (rules.isEmail) {
-      const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      isValid = pattern.test(value) && isValid;
-    }
-
-    if (rules.maxLength) {
-      isValid = value.length <= rules.maxLength && isValid;
-    }
-    return isValid;
-  }
-
   submitHandler = event => {
     event.preventDefault();
     this.props.onAuth(
@@ -93,7 +72,7 @@ class Auth extends Component {
     const updatedControls = updateObject(this.state.controls, {
       [controlName]: updateObject(this.state.controls[controlName], {
         value: event.target.value,
-        valid: this.checkValidity(
+        valid: checkValidity(
           event.target.value,
           this.state.controls[controlName].validation
         ),

@@ -9,7 +9,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
 
 import withErrorHandler from '../../withErrorHandler/withErrorHandler';
-import { updateObject } from '../../../shared/utility';
+import { updateObject, checkValidity } from '../../../shared/utility';
 
 import { purchaseBurguer } from '../../../store/actions/order';
 
@@ -122,7 +122,7 @@ class ContactData extends Component {
       this.state.orderForm[inputIdentifier],
       {
         value: event.target.value,
-        valid: this.checkValidity(
+        valid: checkValidity(
           event.target.value,
           this.state.orderForm[inputIdentifier].validation
         ),
@@ -142,26 +142,6 @@ class ContactData extends Component {
     this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
   };
 
-  checkValidity(value, rules) {
-    let isValid = true;
-
-    if (rules.required) {
-      isValid = value.trim() !== '' && isValid;
-    }
-    if (rules.minLength) {
-      isValid = value.length >= rules.minLength && isValid;
-    }
-
-    if (rules.isEmail) {
-      const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      isValid = pattern.test(value) && isValid;
-    }
-
-    if (rules.maxLength) {
-      isValid = value.length <= rules.maxLength && isValid;
-    }
-    return isValid;
-  }
   render() {
     const { loading } = this.props;
     const { orderForm, formIsValid } = this.state;
