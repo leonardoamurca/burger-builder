@@ -14,7 +14,7 @@ const Order = ({ ingredients, price }) => {
   return (
     <div className={styles.Order}>
       <p>
-        Ingredients:
+        Ingredientes:
         {finalIngredients.map(ingredient => (
           <span
             key={ingredient.name}
