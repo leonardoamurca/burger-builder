@@ -20,7 +20,7 @@ class ContactData extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'text',
-          placeholder: 'Your name',
+          placeholder: 'Nome completo',
         },
         value: '',
         validation: {
@@ -33,7 +33,7 @@ class ContactData extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'text',
-          placeholder: 'Street',
+          placeholder: 'Rua',
         },
         value: '',
         validation: {
@@ -46,7 +46,7 @@ class ContactData extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'text',
-          placeholder: 'Zip Code',
+          placeholder: 'CEP',
         },
         value: '',
         validation: {
@@ -61,7 +61,7 @@ class ContactData extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'text',
-          placeholder: 'Country',
+          placeholder: 'País',
         },
         value: '',
         validation: {
@@ -74,7 +74,7 @@ class ContactData extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'email',
-          placeholder: 'Your e-mail',
+          placeholder: 'Seu e-mail',
         },
         value: '',
         validation: {
@@ -88,8 +88,8 @@ class ContactData extends Component {
         elementType: 'select',
         elementConfig: {
           options: [
-            { value: 'fastest', displayValue: 'Fastest' },
-            { value: 'cheapest', displayValue: 'Cheapest' },
+            { value: 'fastest', displayValue: 'Rápido' },
+            { value: 'cheapest', displayValue: 'Barato' },
           ],
         },
         value: 'fastest',
@@ -157,7 +157,7 @@ class ContactData extends Component {
 
     return (
       <div className={styles.ContactData}>
-        <h4>Entre your Contact Data</h4>
+        <h4>Preencha suas informações para contato</h4>
         {loading ? (
           <Spinner />
         ) : (
@@ -175,7 +175,7 @@ class ContactData extends Component {
               />
             ))}
             <Button btnType="Success" disabled={!formIsValid}>
-              ORDER
+              PEDIR
             </Button>
           </form>
         )}

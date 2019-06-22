@@ -12,15 +12,15 @@ const CheckoutSummary = ({
 }) => {
   return (
     <div className={styles.CheckoutSummary}>
-      <h1>I hope it tastes well!</h1>
+      <h1>Ser feliz (e bem alimentado) é o que importa!</h1>
       <div style={{ width: '100%', margin: 'auto' }}>
         <Burguer ingredients={ingredients} />
       </div>
       <Button btnType="Danger" clicked={checkoutCancelled}>
-        CANCEL
+        CANCELAR
       </Button>
       <Button btnType="Success" clicked={checkoutContinued}>
-        CONTINUE
+        CONTINUAR
       </Button>
     </div>
   );

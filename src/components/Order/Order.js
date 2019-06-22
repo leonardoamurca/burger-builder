@@ -31,7 +31,7 @@ const Order = ({ ingredients, price }) => {
         ))}
       </p>
       <p>
-        Price: <strong>${Number.parseFloat(price).toFixed(2)}</strong>
+        Preço: <strong>${Number.parseFloat(price).toFixed(2)}</strong>
       </p>
     </div>
   );

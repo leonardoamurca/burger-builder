@@ -6,15 +6,15 @@ import NavigationItem from './NavigationItem/NavigationItem';
 
 const NavigationItems = ({ isAuthenticated }) => (
   <ul className={styles.NavigationItems}>
-    <NavigationItem link="/">Burger Builder</NavigationItem>
+    <NavigationItem link="/">Construa seu hamburger</NavigationItem>
     {isAuthenticated ? (
-      <NavigationItem link="/orders">Orders</NavigationItem>
+      <NavigationItem link="/orders">Seus pedidos</NavigationItem>
     ) : null}
 
     {!isAuthenticated ? (
-      <NavigationItem link="/auth">Sign Up</NavigationItem>
+      <NavigationItem link="/auth">Cadastre-se</NavigationItem>
     ) : (
-      <NavigationItem link="/logout">Logout</NavigationItem>
+      <NavigationItem link="/logout">Sair</NavigationItem>
     )}
   </ul>
 );

@@ -15,7 +15,9 @@ const Burger = ({ ingredients }) => {
     .reduce((arr, el) => arr.concat(el), []);
 
   if (transformedIngredients.length === 0) {
-    transformedIngredients = <p>Please start adding ingredients!</p>;
+    transformedIngredients = (
+      <p>Começe a adicionar ingredientes no seu hamburgão delicioso!</p>
+    );
   }
   return (
     <div className={styles.Burger}>

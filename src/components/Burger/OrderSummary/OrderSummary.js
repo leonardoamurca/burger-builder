@@ -17,18 +17,18 @@ const OrderSummary = ({
 
   return (
     <>
-      <h3>YOUR ORDER</h3>
-      <p>A delicious burguer with the following ingredients: </p>
+      <h3>SEU PEDIDO</h3>
+      <p>Um hamburgão delicioso com os seguintes ingredientes: </p>
       <ul>{ingredientsSummary}</ul>
       <p>
-        <strong>Total price: ${totalPrice.toFixed(2)}</strong>
+        <strong>Valor total: ${totalPrice.toFixed(2)}</strong>
       </p>
-      <p>Continue to checkout?</p>
+      <p>Prosseguir para o pagamento?</p>
       <Button btnType="Danger" clicked={purchaseCanceled}>
-        CANCEL
+        CANCELAR
       </Button>
       <Button btnType="Success" clicked={purchaseContinued}>
-        CONTINUE
+        CONTINUAR
       </Button>
     </>
   );

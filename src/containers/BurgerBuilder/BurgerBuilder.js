@@ -104,7 +104,9 @@ export class BurgerBuilder extends Component {
             />
           </>
         ) : error ? (
-          <h1 style={{ textAlign: 'center' }}>Ingredients cannot be loaded!</h1>
+          <h1 style={{ textAlign: 'center' }}>
+            Não foi possível carregar os ingredientes!
+          </h1>
         ) : (
           <Spinner />
         )}

@@ -5,10 +5,10 @@ import styles from './BuildControls.module.css';
 import BuildControl from './BuildControl/BuildControl';
 
 const controls = [
-  { label: 'Salad', type: 'salad' },
+  { label: 'Salada', type: 'salad' },
   { label: 'Bacon', type: 'bacon' },
-  { label: 'Cheese', type: 'cheese' },
-  { label: 'Meat', type: 'meat' },
+  { label: 'Queijo', type: 'cheese' },
+  { label: 'Carne', type: 'meat' },
 ];
 
 const BuildControls = ({
@@ -22,7 +22,7 @@ const BuildControls = ({
 }) => (
   <div className={styles.BuildControls}>
     <p>
-      Current Price: <strong>${currentPrice.toFixed(2)}</strong>
+      Preço atual: <strong>R${currentPrice.toFixed(2)}</strong>
     </p>
     {controls.map(ctrl => {
       return (
@@ -41,7 +41,7 @@ const BuildControls = ({
       disabled={!purchaseable}
       onClick={ordered}
     >
-      {isAuth ? 'ORDER NOW' : 'SIGN UP TO ORDER'}
+      {isAuth ? 'PEDIR AGORA' : 'CADASTRE-SE PARA PEDIR'}
     </button>
   </div>
 );
