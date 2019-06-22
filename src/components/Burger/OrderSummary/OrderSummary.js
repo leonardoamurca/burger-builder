@@ -17,7 +17,7 @@ const OrderSummary = ({
 
   return (
     <>
-      <h3>YOUR ORDER</h3>ingredients
+      <h3>YOUR ORDER</h3>
       <p>A delicious burguer with the following ingredients: </p>
       <ul>{ingredientsSummary}</ul>
       <p>
