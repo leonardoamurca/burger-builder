@@ -8,18 +8,16 @@ const OrderSummary = ({
   purchaseContinued,
   purchaseCanceled,
 }) => {
-  const ingredientsSummary = Object.keys(ingredients).map(igKey => {
-    return (
-      <li key={igKey}>
-        <span style={{ textTransform: 'capitalize' }}>{igKey}: </span>
-        {ingredients[igKey]}
-      </li>
-    );
-  });
+  const ingredientsSummary = Object.keys(ingredients).map(igKey => (
+    <li key={igKey}>
+      <span style={{ textTransform: 'capitalize' }}>{igKey}: </span>
+      {[igKey]}
+    </li>
+  ));
 
   return (
     <>
-      <h3>YOUR ORDER</h3>
+      <h3>YOUR ORDER</h3>ingredients
       <p>A delicious burguer with the following ingredients: </p>
       <ul>{ingredientsSummary}</ul>
       <p>
