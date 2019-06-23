@@ -11,6 +11,8 @@ const Order = ({ ingredients, price }) => {
       amount: ingredients[ingredientName],
     });
   }
+
+  console.log(finalIngredients);
   return (
     <div className={styles.Order}>
       <p>

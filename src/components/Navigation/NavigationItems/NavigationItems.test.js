@@ -25,7 +25,9 @@ describe('<NavigationItems/> ', () => {
   it('should have the exact component', () => {
     wrapper.setProps({ isAuthenticated: true });
     expect(
-      wrapper.contains(<NavigationItem link="/logout">Logout</NavigationItem>)
+      wrapper.contains(
+        <NavigationItem link="/orders">Seus pedidos</NavigationItem>
+      )
     ).toEqual(true);
   });
 });

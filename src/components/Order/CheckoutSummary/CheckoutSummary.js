@@ -10,6 +10,7 @@ const CheckoutSummary = ({
   checkoutContinued,
   checkoutCancelled,
 }) => {
+  console.log(ingredients);
   return (
     <div className={styles.CheckoutSummary}>
       <h1>Ser feliz (e bem alimentado) é o que importa!</h1>
