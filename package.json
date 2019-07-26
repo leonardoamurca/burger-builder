@@ -54,6 +54,7 @@
     "react-router-dom": "^5.0.0",
     "react-test-renderer": "^16.8.6",
     "redux": "^4.0.1",
+    "redux-saga": "^1.0.5",
     "redux-thunk": "^2.3.0",
     "resolve": "1.10.0",
     "sass-loader": "7.1.0",
