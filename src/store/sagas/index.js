@@ -5,6 +5,8 @@ import {
   AUTH_USER,
   AUTH_CHECK_STATE,
   INITIALIZE_INGREDIENTS,
+  PURCHASE_BURGUER,
+  FETCH_ORDERS,
 } from '../actions/types';
 
 import {
@@ -16,6 +18,8 @@ import {
 
 import { initIngredientsSaga } from './burguerBuilder';
 
+import { purchaseBurguerSaga, fetchOrdersSaga } from './order';
+
 export function* watchAuth() {
   yield takeEvery(AUTH_CHECK_TIMEOUT, checkAuthTimeoutSaga);
   yield takeEvery(AUTH_INITIATE_LOGOUT, logoutSaga);
@@ -25,4 +29,9 @@ export function* watchAuth() {
 
 export function* watchBurgerBuilder() {
   yield takeEvery(INITIALIZE_INGREDIENTS, initIngredientsSaga);
+}
+
+export function* watchOrder() {
+  yield takeEvery(PURCHASE_BURGUER, purchaseBurguerSaga);
+  yield takeEvery(FETCH_ORDERS, fetchOrdersSaga);
 }

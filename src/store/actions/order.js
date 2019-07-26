@@ -1,5 +1,3 @@
-import axios from '../../axios-orders';
-
 import {
   PURCHASE_BURGUER_START,
   PURCHASE_BURGUER_SUCCESS,
@@ -8,6 +6,8 @@ import {
   FETCH_ORDERS_START,
   FETCH_ORDERS_SUCCESS,
   FETCH_ORDERS_FAIL,
+  PURCHASE_BURGUER,
+  FETCH_ORDERS,
 } from './types';
 
 export const purchaseBurguerStart = () => ({
@@ -29,17 +29,12 @@ export const purchaseInit = () => ({
   type: PURCHASE_INIT,
 });
 
-export const purchaseBurguer = (orderData, token) => dispatch => {
-  purchaseBurguerStart();
-  console.log('orderData', orderData);
-  axios
-    .post('/orders.json?auth=' + token, orderData)
-    .then(response => {
-      dispatch(purchaseBurguerSuccess(response.data.name, orderData));
-    })
-    .catch(error => {
-      dispatch(purchaseBurguerFail(error));
-    });
+export const purchaseBurguer = (orderData, token) => {
+  return {
+    type: PURCHASE_BURGUER,
+    orderData,
+    token,
+  };
 };
 
 export const fetchOrdersStart = () => ({
@@ -56,23 +51,10 @@ export const fetchOrdersFail = error => ({
   error,
 });
 
-export const fetchOrders = (token, userId) => dispatch => {
-  dispatch(fetchOrdersStart());
-  const queryParams =
-    '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"';
-  axios
-    .get('/orders.json' + queryParams)
-    .then(res => {
-      const fetchedOrders = [];
-      for (let key in res.data) {
-        fetchedOrders.push({
-          ...res.data[key],
-          id: key,
-        });
-      }
-      dispatch(fetchOrdersSuccess(fetchedOrders));
-    })
-    .catch(err => {
-      dispatch(fetchOrdersFail(err));
-    });
+export const fetchOrders = (token, userId) => {
+  return {
+    type: FETCH_ORDERS,
+    token,
+    userId,
+  };
 };
