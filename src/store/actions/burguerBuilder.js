@@ -1,10 +1,9 @@
-import axios from '../../axios-orders';
-
 import {
   ADD_INGREDIENT,
   REMOVE_INGREDIENT,
   SET_INGREDIENTS,
   FETCH_INGREDIENTS_FAILED,
+  INITIALIZE_INGREDIENTS,
 } from './types';
 
 export const addIngredient = ingredientName => ({
@@ -27,13 +26,8 @@ export const fetchIngredientsFailed = error => ({
   error,
 });
 
-export const initIngredients = () => dispatch => {
-  axios
-    .get('https://my-burguer-builder.firebaseio.com/ingredients.json')
-    .then(response => {
-      dispatch(setIngredients(response.data));
-    })
-    .catch(error => {
-      dispatch(fetchIngredientsFailed(error));
-    });
+export const initIngredients = () => {
+  return {
+    type: INITIALIZE_INGREDIENTS,
+  };
 };
