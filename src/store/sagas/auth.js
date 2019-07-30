@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { signUpUrl, loginUrl } from '../../configs/endpoints';
-import { put, delay } from 'redux-saga/effects';
+import { put, delay, call } from 'redux-saga/effects';
 
 import {
   logoutSucceed,
@@ -12,9 +12,10 @@ import {
 } from '../actions/auth';
 
 export function* logoutSaga(action) {
-  yield localStorage.removeItem('token');
-  yield localStorage.removeItem('expirationDate');
-  yield localStorage.removeItem('userId');
+  yield call([localStorage, 'removeItem'], 'token');
+  yield call([localStorage, 'removeItem'], 'expirationDate');
+  yield call([localStorage, 'removeItem'], 'userId');
+
   yield put(logoutSucceed());
 }
 
@@ -43,6 +44,7 @@ export function* authUserSaga(action) {
     const expirationDate = yield new Date(
       new Date().getTime() + response.data.expiresIn * 1000
     );
+
     yield localStorage.setItem('token', response.data.idToken);
     yield localStorage.setItem('expirationDate', expirationDate);
     yield localStorage.setItem('userId', response.data.localId);
